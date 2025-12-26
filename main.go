@@ -12,7 +12,7 @@ func main() {
 	weatherData, err := weather.GetForecast()
 
 	if err != nil {
-		logger.Log("error retrieving weather data")
+		logger.Error("error retrieving weather data", err)
 		os.Exit(1)
 	}
 

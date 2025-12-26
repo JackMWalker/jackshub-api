@@ -25,7 +25,7 @@ func GetForecast() (*WeatherResponse, error) {
 	resp, err := http.Get(url)
 
 	if err != nil {
-		logger.Log("error making http request: %s", err)
+		logger.Error("error making http request", err)
 		return nil, err
 	}
 
@@ -33,7 +33,7 @@ func GetForecast() (*WeatherResponse, error) {
 
 	resBody, err := io.ReadAll(resp.Body)
 	if err != nil {
-		logger.Log("could not read response body: %s", err)
+		logger.Error("could not read response body", err)
 		return nil, err
 	}
 
@@ -42,7 +42,7 @@ func GetForecast() (*WeatherResponse, error) {
 	err = json.Unmarshal(resBody, &weatherResponse)
 
 	if err != nil {
-		logger.Log("unexpected response body structure: %s", err)
+		logger.Error("unexpected response body structure", err)
 		return nil, err
 	}
 
